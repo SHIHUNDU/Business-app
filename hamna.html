@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="HAMNA IT - Empowering Businesses Through No-Code Innovation & Automation. We provide no-code solutions, workflow automation, and affordable technology consulting for startups and businesses.">
+    <title>HAMNA IT - No-Code Innovation & Automation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style id="app-style">
+      :root {
+        --primary: #0070f3;
+        --primary-dark: #0050b3;
+        --accent: #111827;
+        --light: #ffffff;
+        --gray-light: #f3f4f6;
+        --gray: #9ca3af;
+        --text: #374151;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        scroll-behavior: smooth;
+      }
+      
+      .transition-all {
+        transition: all 0.3s ease;
+      }
+      
+      .hero-gradient {
+        background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,249,255,0.9) 100%);
+      }
+      
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      
+      .service-icon {
+        color: var(--primary);
+        transition: transform 0.3s ease;
+      }
+      
+      .service-card:hover .service-icon {
+        transform: scale(1.1);
+      }
+      
+      .counter-value {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      
+      .testimonial-card {
+        transition: all 0.3s ease;
+      }
+      
+      .testimonial-card:hover {
+        transform: scale(1.02);
+      }
+      
+      .nav-link {
+        position: relative;
+      }
+      
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+      }
+      
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+      
+      .whatsapp-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 100;
+        transition: transform 0.3s ease;
+      }
+      
+      .whatsapp-button:hover {
+        transform: scale(1.1);
+      }
+      
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        display: none;
+      }
+      
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+      }
+      
+      /* Animation classes */
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+      
+      .slide-up {
+        animation: slideUp 0.5s ease-out;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      
+      /* Portfolio before/after slider */
+      .before-after-container {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .before-image,
+      .after-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .after-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+      }
+      
+      .slider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        background-color: white;
+        cursor: ew-resize;
+        transform: translateX(-50%);
+      }
+      
+      .slider-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+      
+      .slider-button i {
+        color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav id="main-nav" class="sticky top-0 bg-white shadow-md z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <a href="#home" class="text-2xl font-bold text-gray-800">
+              <span class="text-blue-600">HAMNA</span> IT
+            </a>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a href="#home" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Home</a>
+            <a href="#about" class="nav-link text-gray-700 hover:text-blue-600 font-medium">About</a>
+            <a href="#services" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Services</a>
+            <a href="#portfolio" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Portfolio</a>
+            <a href="#testimonials" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Testimonials</a>
+            <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+          </div>
+          <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden py-4 bg-white">
+          <a href="#home" class="block py-2 px-4 text-gray-700 hover:text-blue-600 font-medium">Home</a>
+          <a href="#about" class="block py-2 px-4 text-gray-700 hover:text-blue-600 font-medium">About</a>
+          <a href="#services" class="block py-2 px-4 text-gray-700 hover:text-blue-600 font-medium">Services</a>
+          <a href="#portfolio" class="block py-2 px-4 text-gray-700 hover:text-blue-600 font-medium">Portfolio</a>
+          <a href="#testimonials" class="block py-2 px-4 text-gray-700 hover:text-blue-600 font-medium">Testimonials</a>
+          <a href="#contact" class="block py-2 px-4 text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen flex items-center hero-gradient">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col md:flex-row md:items-center">
+          <div class="md:w-1/2 mb-8 md:mb-0">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate__animated animate__fadeInUp">
+              Empowering Businesses Through <span class="text-blue-600">No-Code Innovation</span> & <span class="text-blue-600">Automation</span>
+            </h1>
+            <p class="text-xl text-gray-700 mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+              HAMNA IT delivers cutting-edge technology solutions that transform your business operations without complex coding or expensive development cycles.
+            </p>
+            <div class="flex flex-wrap gap-4 animate__animated animate__fadeInUp animate__delay-2s">
+              <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-8 rounded-lg font-semibold transition-all inline-flex items-center">
+                <span>Book Consultation</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+              <a href="#services" class="bg-white hover:bg-gray-100 text-blue-600 border border-blue-600 py-3 px-8 rounded-lg font-semibold transition-all inline-flex items-center">
+                <span>Get a Quote</span>
+                <i class="fas fa-calculator ml-2"></i>
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2 flex justify-center animate__animated animate__fadeIn animate__delay-1s">
+            <img src="https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_1280.jpg" alt="Digital Innovation" class="rounded-xl shadow-2xl max-w-full h-auto max-h-96 object-cover" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Overview Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">How We Transform Your Business</h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Our innovative no-code solutions help businesses automate workflows, integrate systems, and create powerful applications without traditional development costs.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all text-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-bolt text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Rapid Development</h3>
+            <p class="text-gray-600">
+              Launch your digital solutions in days or weeks, not months, with our no-code approach.
+            </p>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all text-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-robot text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Process Automation</h3>
+            <p class="text-gray-600">
+              Eliminate manual tasks and reduce errors by automating your business workflows.
+            </p>
+          </div>
+          
+          <!-- Card 3 -->
+          <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all text-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-coins text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Cost Efficiency</h3>
+            <p class="text-gray-600">
+              Get enterprise-level solutions at a fraction of traditional development costs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto mb-16 text-center">
+          <h2 class="text-3xl font-bold mb-4">About HAMNA IT</h2>
+          <p class="text-lg text-gray-600">
+            We're on a mission to make digital transformation accessible to businesses of all sizes.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Mission -->
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <i class="fas fa-bullseye text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Our Mission</h3>
+            <p class="text-gray-600">
+              To simplify business technology by providing innovative, accessible solutions that empower organizations to achieve their goals without technical barriers.
+            </p>
+          </div>
+          
+          <!-- Vision -->
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <i class="fas fa-eye text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Our Vision</h3>
+            <p class="text-gray-600">
+              A world where digital transformation is accessible to all businesses, regardless of size or technical expertise, enabling them to compete and thrive in the digital economy.
+            </p>
+          </div>
+          
+          <!-- Values -->
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <i class="fas fa-heart text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Our Values</h3>
+            <ul class="text-gray-600 space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-check text-blue-600 mr-2"></i>
+                <span>Innovation in simplicity</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-blue-600 mr-2"></i>
+                <span>Speed and efficiency</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-blue-600 mr-2"></i>
+                <span>Excellence in execution</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-blue-600 mr-2"></i>
+                <span>Transparency and honesty</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section class="py-16 bg-blue-600 text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="counter-value" data-target="150">0</div>
+            <p class="text-lg font-medium">Projects Completed</p>
+          </div>
+          <div>
+            <div class="counter-value" data-target="85">0</div>
+            <p class="text-lg font-medium">Businesses Automated</p>
+          </div>
+          <div>
+            <div class="counter-value" data-target="95">0</div>
+            <p class="text-lg font-medium">Satisfied Clients</p>
+          </div>
+          <div>
+            <div class="counter-value" data-target="10000">0</div>
+            <p class="text-lg font-medium">Hours Saved</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto mb-16 text-center">
+          <h2 class="text-3xl font-bold mb-4">Our Services</h2>
+          <p class="text-lg text-gray-600">
+            We provide comprehensive no-code and low-code solutions that transform how businesses operate.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Service 1 -->
+          <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="service-icon text-5xl mb-6">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">No-Code App Development</h3>
+            <p class="text-gray-600 mb-4">
+              Custom business applications built without traditional coding, deployed in a fraction of the time and cost.
+            </p>
+            <h4 class="font-medium text-blue-600 mb-2">Use Cases:</h4>
+            <ul class="text-gray-600 space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Customer relationship management (CRM)</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Inventory management systems</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Project management tools</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Service 2 -->
+          <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="service-icon text-5xl mb-6">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Automation of Workflows</h3>
+            <p class="text-gray-600 mb-4">
+              Streamline repetitive tasks and business processes to increase efficiency and reduce human error.
+            </p>
+            <h4 class="font-medium text-blue-600 mb-2">Use Cases:</h4>
+            <ul class="text-gray-600 space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Approval processes automation</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Document generation and processing</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Email and notification systems</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Service 3 -->
+          <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="service-icon text-5xl mb-6">
+              <i class="fas fa-plug"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Integration of Apps & Systems</h3>
+            <p class="text-gray-600 mb-4">
+              Connect your existing software systems to eliminate data silos and create a unified workflow.
+            </p>
+            <h4 class="font-medium text-blue-600 mb-2">Use Cases:</h4>
+            <ul class="text-gray-600 space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>CRM and accounting software integration</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>E-commerce and inventory synchronization</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Legacy system connections</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Service 4 -->
+          <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="service-icon text-5xl mb-6">
+              <i class="fas fa-desktop"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Website & Dashboard Creation</h3>
+            <p class="text-gray-600 mb-4">
+              Visually stunning, mobile-responsive websites and data dashboards that drive decisions.
+            </p>
+            <h4 class="font-medium text-blue-600 mb-2">Use Cases:</h4>
+            <ul class="text-gray-600 space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Business intelligence dashboards</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Client portals and interfaces</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Marketing websites with integrated tools</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Service 5 -->
+          <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all">
+            <div class="service-icon text-5xl mb-6">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Technical Support for Startups</h3>
+            <p class="text-gray-600 mb-4">
+              Dedicated technical expertise to help startups build and scale their technology infrastructure.
+            </p>
+            <h4 class="font-medium text-blue-600 mb-2">Use Cases:</h4>
+            <ul class="text-gray-600 space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Technology stack consultation</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>MVP development and iteration</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-blue-600 mr-2"></i>
+                <span>Scaling guidance and implementation</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto mb-16 text-center">
+          <h2 class="text-3xl font-bold mb-4">Our Success Stories</h2>
+          <p class="text-lg text-gray-600">
+            See how we've transformed businesses through our no-code and automation solutions.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Case Study 1 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+            <div class="before-after-container" style="height: 300px;">
+              <img src="https://cdn.pixabay.com/photo/2015/07/02/10/23/writing-828911_1280.jpg" alt="Before" class="before-image" />
+              <img src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_1280.jpg" alt="After" class="after-image" />
+              <div class="slider">
+                <div class="slider-button">
+                  <i class="fas fa-arrows-alt-h"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Retail Inventory Management</h3>
+              <p class="text-gray-600 mb-4">
+                Transformed a manual inventory process into a fully automated system with real-time tracking and alerts.
+              </p>
+              <div class="grid grid-cols-3 gap-4 mt-6">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">85%</div>
+                  <p class="text-sm text-gray-500">Time Saved</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">95%</div>
+                  <p class="text-sm text-gray-500">Errors Reduced</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">40%</div>
+                  <p class="text-sm text-gray-500">Cost Reduction</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Case Study 2 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+            <div class="before-after-container" style="height: 300px;">
+              <img src="https://cdn.pixabay.com/photo/2015/01/08/18/24/children-593313_1280.jpg" alt="Before" class="before-image" />
+              <img src="https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_1280.jpg" alt="After" class="after-image" />
+              <div class="slider">
+                <div class="slider-button">
+                  <i class="fas fa-arrows-alt-h"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Client Onboarding Automation</h3>
+              <p class="text-gray-600 mb-4">
+                Streamlined a 14-day client onboarding process down to just 2 days with automated workflows and documentation.
+              </p>
+              <div class="grid grid-cols-3 gap-4 mt-6">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">85%</div>
+                  <p class="text-sm text-gray-500">Faster Process</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">100%</div>
+                  <p class="text-sm text-gray-500">Digital Forms</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">30%</div>
+                  <p class="text-sm text-gray-500">Revenue Growth</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Case Study 3 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+            <img src="https://cdn.pixabay.com/photo/2021/11/04/06/27/dashboard-6767949_1280.jpg" alt="Dashboard" class="w-full h-60 object-cover" />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Sales Analytics Dashboard</h3>
+              <p class="text-gray-600 mb-4">
+                Created an interactive dashboard that consolidated data from multiple sources, providing real-time insights into sales performance.
+              </p>
+              <div class="grid grid-cols-3 gap-4 mt-6">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">100%</div>
+                  <p class="text-sm text-gray-500">Data Visibility</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">25%</div>
+                  <p class="text-sm text-gray-500">Sales Increase</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">4 hrs</div>
+                  <p class="text-sm text-gray-500">Weekly Saved</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Case Study 4 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+            <img src="https://cdn.pixabay.com/photo/2019/10/03/12/12/business-4523599_1280.jpg" alt="Integration" class="w-full h-60 object-cover" />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Multi-System Integration</h3>
+              <p class="text-gray-600 mb-4">
+                Connected CRM, accounting, and e-commerce platforms to create a seamless data flow across a growing business.
+              </p>
+              <div class="grid grid-cols-3 gap-4 mt-6">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">0</div>
+                  <p class="text-sm text-gray-500">Manual Entry</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">99.9%</div>
+                  <p class="text-sm text-gray-500">Data Accuracy</p>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">50%</div>
+                  <p class="text-sm text-gray-500">Process Speed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto mb-16 text-center">
+          <h2 class="text-3xl font-bold mb-4">What Our Clients Say</h2>
+          <p class="text-lg text-gray-600">
+            Don't just take our word for it. Here's what our clients have to say about working with HAMNA IT.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card bg-gray-50 p-8 rounded-xl shadow-lg">
+            <div class="flex items-center mb-6">
+              <img src="https://cdn.pixabay.com/photo/2019/10/03/08/07/portrait-4522955_1280.jpg" alt="Client" class="w-16 h-16 rounded-full object-cover mr-4" />
+              <div>
+                <h4 class="font-semibold">Sarah Johnson</h4>
+                <p class="text-gray-600 text-sm">CEO, TechStart Inc.</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 italic">
+              "HAMNA IT transformed our business processes in just weeks. What would have cost us six figures and taken months with traditional development was delivered on budget and ahead of schedule."
+            </p>
+          </div>
+          
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card bg-gray-50 p-8 rounded-xl shadow-lg">
+            <div class="flex items-center mb-6">
+              <img src="https://cdn.pixabay.com/photo/2018/04/27/03/50/portrait-3353699_1280.jpg" alt="Client" class="w-16 h-16 rounded-full object-cover mr-4" />
+              <div>
+                <h4 class="font-semibold">Michael Rodriguez</h4>
+                <p class="text-gray-600 text-sm">Operations Director, GlobalTrade</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 italic">
+              "The automated workflow HAMNA created for us eliminated 40+ hours of weekly manual data entry. Our team can now focus on strategic initiatives instead of repetitive tasks."
+            </p>
+          </div>
+          
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card bg-gray-50 p-8 rounded-xl shadow-lg">
+            <div class="flex items-center mb-6">
+              <img src="https://cdn.pixabay.com/photo/2017/08/12/18/31/male-2634974_1280.jpg" alt="Client" class="w-16 h-16 rounded-full object-cover mr-4" />
+              <div>
+                <h4 class="font-semibold">David Chen</h4>
+                <p class="text-gray-600 text-sm">Founder, InnovateNow</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 italic">
+              "As a startup founder, I needed to move fast without breaking the bank. HAMNA IT's no-code solutions gave us enterprise-level functionality at startup-friendly prices."
+            </p>
+          </div>
+          
+          <!-- Video Testimonial -->
+          <div class="testimonial-card bg-gray-50 p-8 rounded-xl shadow-lg lg:col-span-3">
+            <div class="aspect-w-16 aspect-h-9">
+              <img src="https://cdn.pixabay.com/photo/2022/08/24/14/43/conference-room-7407963_1280.jpg" alt="Video Testimonial" class="w-full rounded-lg object-cover h-96" />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-blue-700 transition-all">
+                  <i class="fas fa-play text-white text-2xl"></i>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 text-center">
+              <h4 class="font-semibold">Hear from our satisfied clients</h4>
+              <p class="text-gray-600 text-sm">Watch our client success stories</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+          <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <!-- Contact Form -->
+              <div class="p-8 lg:p-12">
+                <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
+                <p class="text-gray-600 mb-8">
+                  Ready to transform your business with no-code innovation? Reach out to us today.
+                </p>
+                <form id="contact-form" class="space-y-6">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                  </div>
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                  </div>
+                  <div>
+                    <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                    <input type="text" id="company" name="company" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                  </div>
+                  <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                  </div>
+                  <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition-all inline-flex items-center justify-center">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane ml-2"></i>
+                  </button>
+                </form>
+              </div>
+              
+              <!-- Contact Info -->
+              <div class="bg-blue-600 text-white p-8 lg:p-12">
+                <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                <div class="space-y-6">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-500">
+                      <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="ml-4">
+                      <p class="font-medium">Email Us</p>
+                      <a href="mailto:info@hamnait.com" class="text-blue-100 hover:text-white">info@hamnait.com</a>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-500">
+                      <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="ml-4">
+                      <p class="font-medium">Call Us</p>
+                      <a href="tel:+1234567890" class="text-blue-100 hover:text-white">+1 (234) 567-890</a>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-500">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="ml-4">
+                      <p class="font-medium">Visit Us</p>
+                      <p class="text-blue-100">123 Innovation Street, Tech City, TC 10101</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mt-12">
+                  <h4 class="font-bold text-xl mb-4">Book a Free Strategy Call</h4>
+                  <p class="text-blue-100 mb-6">
+                    Schedule a 30-minute call with our experts to discuss your business needs and discover how we can help.
+                  </p>
+                  <a href="javascript:void(0)" class="inline-block bg-white text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-lg font-semibold transition-all">
+                    Schedule Call
+                  </a>
+                </div>
+                
+                <div class="mt-12">
+                  <h4 class="font-bold text-xl mb-4">Connect With Us</h4>
+                  <div class="flex space-x-4">
+                    <a href="javascript:void(0)" class="h-10 w-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-400 transition-all">
+                      <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="h-10 w-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-400 transition-all">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="h-10 w-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-400 transition-all">
+                      <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="h-10 w-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-400 transition-all">
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div>
+            <h4 class="text-xl font-bold mb-4">HAMNA IT</h4>
+            <p class="text-gray-400 mb-4">
+              Empowering businesses through no-code innovation and automation.
+            </p>
+            <div class="flex space-x-4">
+              <a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-all">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-all">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-all">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="javascript:void(0)" class="text-gray-400 hover:text-white transition-all">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li><a href="#home" class="text-gray-400 hover:text-white transition-all">Home</a></li>
+              <li><a href="#about" class="text-gray-400 hover:text-white transition-all">About</a></li>
+              <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Services</a></li>
+              <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-all">Portfolio</a></li>
+              <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-all">Testimonials</a></li>
+              <li><a href="#contact" class="text-gray-400 hover:text-white transition-all">Contact</a></li>
+            </ul>
+          </div>
+          
+          <!-- Services -->
+          <div>
+            <h4 class="text-xl font-bold mb-4">Our Services</h4>
+            <ul class="space-y-2">
+              <li><a href="#services" class="text-gray-400 hover:text-white transition-all">No-Code App Development</a></li>
+              <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Workflow Automation</a></li>
+              <li><a href="#services" class="text-gray-400 hover:text-white transition-all">System Integration</a></li>
+              <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Website & Dashboard Creation</a></li>
+              <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Technical Support</a></li>
+            </ul>
+          </div>
+          
+          <!-- Newsletter -->
+          <div>
+            <h4 class="text-xl font-bold mb-4">Newsletter</h4>
+            <p class="text-gray-400 mb-4">
+              Subscribe to our newsletter for the latest updates and insights.
+            </p>
+            <form id="footer-newsletter">
+              <div class="flex">
+                <input type="email" placeholder="Your email" class="flex-grow px-4 py-2 rounded-l-lg focus:outline-none text-gray-900">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg transition-all">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8 mt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400">&copy; 2025 HAMNA IT. All rights reserved.</p>
+            <div class="mt-4 md:mt-0">
+              <a href="javascript:void(0)" class="text-gray-400 hover:text-white mx-3 transition-all">Privacy Policy</a>
+              <a href="javascript:void(0)" class="text-gray-400 hover:text-white mx-3 transition-all">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="javascript:void(0)" id="whatsapp-button" class="whatsapp-button bg-green-500 hover:bg-green-600 w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
+      <i class="fab fa-whatsapp text-white text-3xl"></i>
+    </a>
+
+    <!-- Newsletter Popup -->
+    <div class="overlay" id="newsletter-overlay"></div>
+    <div class="popup bg-white rounded-xl shadow-2xl p-8 max-w-md mx-auto" id="newsletter-popup">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-2xl font-bold">Get Weekly Tech Insights</h3>
+        <button id="close-popup" class="text-gray-400 hover:text-gray-600">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <p class="text-gray-600 mb-6">
+        Subscribe to our newsletter for weekly tips on no-code development, automation, and digital transformation.
+      </p>
+      <form id="popup-newsletter">
+        <div class="mb-4">
+          <input type="email" placeholder="Your email address" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition-all">
+          Subscribe Now
+        </button>
+      </form>
+      <p class="text-xs text-gray-500 mt-4 text-center">
+        By subscribing, you agree to our Privacy Policy. You can unsubscribe at any time.
+      </p>
+    </div>
+
+    <script id="app-script">
+      // Mobile menu toggle
+      document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          // Close mobile menu if open
+          document.getElementById('mobile-menu').classList.add('hidden');
+          
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+            
+            // Update active state in nav
+            document.querySelectorAll('.nav-link').forEach(link => {
+              link.classList.remove('active');
+            });
+            this.classList.add('active');
+          }
+        });
+      });
+      
+      // Animate counters
+      function animateCounters() {
+        const counters = document.querySelectorAll('.counter-value');
+        const speed = 200;
+        
+        counters.forEach(counter => {
+          const target = +counter.getAttribute('data-target');
+          const increment = target / speed;
+          let currentCount = 0;
+          
+          const updateCount = () => {
+            if (currentCount < target) {
+              currentCount += increment;
+              counter.innerText = Math.ceil(currentCount);
+              setTimeout(updateCount, 1);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          
+          updateCount();
+        });
+      }
+      
+      // Before-after slider functionality
+      const sliders = document.querySelectorAll('.slider');
+      sliders.forEach(slider => {
+        const container = slider.closest('.before-after-container');
+        const afterImage = container.querySelector('.after-image');
+        
+        function moveSlider(e) {
+          let position;
+          
+          if (e.type === 'touchmove') {
+            position = e.touches[0].clientX - container.getBoundingClientRect().left;
+          } else {
+            position = e.clientX - container.getBoundingClientRect().left;
+          }
+          
+          const containerWidth = container.offsetWidth;
+          let positionPercent = (position / containerWidth) * 100;
+          
+          positionPercent = Math.min(Math.max(positionPercent, 0), 100);
+          
+          slider.style.left = `${positionPercent}%`;
+          afterImage.style.clipPath = `polygon(${positionPercent}% 0, 100% 0, 100% 100%, ${positionPercent}% 100%)`;
+        }
+        
+        function startSlide(e) {
+          e.preventDefault();
+          
+          if (e.type === 'touchstart') {
+            container.addEventListener('touchmove', moveSlider);
+            container.addEventListener('touchend', stopSlide);
+          } else {
+            container.addEventListener('mousemove', moveSlider);
+            container.addEventListener('mouseup', stopSlide);
+            document.addEventListener('mouseup', stopSlide);
+          }
+        }
+        
+        function stopSlide() {
+          container.removeEventListener('mousemove', moveSlider);
+          container.removeEventListener('touchmove', moveSlider);
+        }
+        
+        slider.addEventListener('mousedown', startSlide);
+        slider.addEventListener('touchstart', startSlide);
+      });
+      
+      // Form validation
+      document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        let isValid = true;
+        
+        if (!name.trim()) {
+          isValid = false;
+          alert('Please enter your name');
+        } else if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+          isValid = false;
+          alert('Please enter a valid email address');
+        } else if (!message.trim()) {
+          isValid = false;
+          alert('Please enter your message');
+        }
+        
+        if (isValid) {
+          // This would normally send the form data to a server
+          alert('Thank you for your message! We will get back to you soon.');
+          this.reset();
+        }
+      });
+      
+      // Newsletter signup
+      document.getElementById('footer-newsletter').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+          // Store in localStorage for the prototype
+          const subscribers = JSON.parse(localStorage.getItem('newsletter-subscribers') || '[]');
+          subscribers.push(email);
+          localStorage.setItem('newsletter-subscribers', JSON.stringify(subscribers));
+          
+          alert('Thank you for subscribing to our newsletter!');
+          this.reset();
+        } else {
+          alert('Please enter a valid email address');
+        }
+      });
+      
+      // Popup newsletter
+      document.getElementById('popup-newsletter').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+          // Store in localStorage for the prototype
+          const subscribers = JSON.parse(localStorage.getItem('newsletter-subscribers') || '[]');
+          subscribers.push(email);
+          localStorage.setItem('newsletter-subscribers', JSON.stringify(subscribers));
+          
+          hidePopup();
+          alert('Thank you for subscribing to our newsletter!');
+        } else {
+          alert('Please enter a valid email address');
+        }
+      });
+      
+      // WhatsApp button click handler
+      document.getElementById('whatsapp-button').addEventListener('click', function() {
+        // This would normally open WhatsApp with a preset message
+        alert('This would open WhatsApp with a preset message: "Hi, I\'m interested in learning more about HAMNA IT services."');
+      });
+      
+      // Show/hide popup
+      function showPopup() {
+        document.getElementById('newsletter-overlay').style.display = 'block';
+        document.getElementById('newsletter-popup').style.display = 'block';
+      }
+      
+      function hidePopup() {
+        document.getElementById('newsletter-overlay').style.display = 'none';
+        document.getElementById('newsletter-popup').style.display = 'none';
+      }
+      
+      document.getElementById('close-popup').addEventListener('click', hidePopup);
+      document.getElementById('newsletter-overlay').addEventListener('click', hidePopup);
+      
+      // Show popup after 5 seconds if the user hasn't already subscribed
+      setTimeout(function() {
+        const hasSubscribed = localStorage.getItem('has-subscribed');
+        if (!hasSubscribed) {
+          showPopup();
+        }
+      }, 5000);
+      
+      // Trigger animations on scroll
+      function handleScrollAnimations() {
+        const elements = document.querySelectorAll('.animate__animated');
+        elements.forEach(element => {
+          const elementPosition = element.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          if (elementPosition < windowHeight - 100) {
+            const animationClass = element.classList[1];
+            element.classList.add(animationClass);
+            element.classList.remove('opacity-0');
+          }
+        });
+      }
+      
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add scroll event for animations
+        window.addEventListener('scroll', function() {
+          // Check if counters are in view
+          const counterSection = document.querySelector('.counter-value');
+          if (counterSection) {
+            const position = counterSection.getBoundingClientRect().top;
+            if (position < window.innerHeight - 100) {
+              animateCounters();
+              // Remove event listener after animation starts
+              window.removeEventListener('scroll', this);
+            }
+          }
+          
+          handleScrollAnimations();
+        });
+        
+        // Trigger initial animations
+        handleScrollAnimations();
+        
+        // Set active nav link based on current section
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', function() {
+          let current = '';
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 200)) {
+              current = section.getAttribute('id');
+            }
+          });
+          
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+              link.classList.add('active');
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
